@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title></title>
+    <title>Title</title>
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    body {
+        color: white;
+    }
+
+    .split {
+        height: 100%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        overflow-x: hidden;
+        padding-top: 20px;
+    }
+
+    .left {
+        left: 0;
+        background-color: rgb(56,56,56);
+        width: 30%;
+    }
+
+    .right {
+        right: 0;
+        background-color: rgb(72,72,72);
+        width: 70%;
+    }
+
+    .margin {
+        float: left;
+        margin: 0 1.5%;
+        width: 30%;
+    }
+
+    .centered {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+
+    .centered img {
+        width: 150px;
+        border-radius: 50%;
+    }
+
+</style>
+<body>
+
+<div class="split left">
+  <div class="centered">
+    <h1><center>Profile</center></h1>
+      <img src="Green%20Gradient%20Minimalist%20Simple%20Instagram%20Profile%20Picture.png" alt="default"><br>
+      <p>Name: {{ first }} {{ last }}</p>
+      <p>Email: {{ email }} </p>
+      <p>Gender: {{ gender }}</p>
+      <p>Age: {{ age }}</p>
+
+
+      <a class="btn btn-success" href="/find_home_page" role="button">Home</a>
+
+  </div>
+</div>
+
+<div class="split right">
+    <div class="margin">
+        <h2><left>Profile Information</left></h2>
+        <p> Major: {{ major }}</p>
+        <p> Home Address: </p>
+        <p> {{ street_num }} {{ street_name }}</p>
+        <p> {{ city }} {{ state }} {{ zipcode }}</p>
+    </div>
+</div>
+
+</body>
+</html>

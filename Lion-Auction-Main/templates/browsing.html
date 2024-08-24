@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title></title>
+
+    <style>
+
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .navbar a {
+            float: left;
+            font-size: 16px;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .dropdown {
+            float: left;
+            overflow: hidden;
+        }
+
+        .dropdown2 {
+            float: left;
+            overflow: hidden;
+        }
+
+
+        .rightbutton {
+            float: right;
+            overflow: hidden;
+        }
+
+        .dropdown .dropbtn {
+            font-size: 16px;
+            border: none;
+            outline: none;
+            color: white;
+            padding: 14px 16px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+        }
+
+        .dropdown2 .dropbtn2 {
+            font-size: 16px;
+            border: none;
+            outline: none;
+            color: black;
+            padding: 14px 50px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+        }
+
+
+        .navbar a:hover, .dropdown:hover .dropbtn {
+            background-color: red;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown2:hover .dropbtn2 {
+            background-color: red;
+        }
+
+        .dropdown-content2 {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 186.7px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content2 a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown-content2 a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown2:hover .dropdown-content2 {
+            display: block;
+            position:relative;
+        }
+
+        h1 {
+            margin-left:10px
+        }
+
+        h3 {
+            margin-left:10px
+        }
+
+        p {
+            margin-left:10px
+        }
+
+        h4{
+            margin-left:10px;
+            margin-right:10px;
+        }
+
+
+    </style>
+
+</head>
+<body>
+<h1><left>Browsing</left></h1>
+
+<form action="/searchbar" method="POST">
+    <div class="form-group">
+            <h3><label for="searchbox">Search Product Name:</label></h3>
+            <h4><input type="text" name="searchbox" required class="form-control"></h4>
+    </div>
+
+    <p><button type="submit" class="btn btn-success btn-sm"> Search </button> </p>
+
+</form>
+
+<div class="navbar">
+    <a href="/find_home_page"> Home </a>
+    <div class="rightbutton">
+        <a href="/name"> Logout </a>
+    </div>
+    <!--<div class="dropdown">
+        <button class="dropbtn">Category
+            <i class="fa fa-caret-down"></i>
+        </button>
+
+        <div class="dropdown-content">
+            <{% for parent_category in result %}>
+                <div class="dropdown2">
+                    <button class="dropbtn2">{{ parent_category }}
+      		            <i class="fa fa-caret-down"></i>
+    	            </button>
+                    <div class="dropdown-content2">
+                        {% for category_name in result %}
+                           <a href="#"> {{ parent_category }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            <{% endfor %}>
+        </div>
+
+
+    </div>-->
+</div> <br/>
+
+<center>
+<form action="/maincategory" method="POST">
+    Select main category:
+    <select name="selected_par" id="selected_par">
+        <option value="All" {% if condition == "All" %} selected {% endif %}> All </option>
+        {% for parent_category in result %}
+            <option value="{{parent_category[0]}}" {% if condition == parent_category[0] %} selected {% endif %}> {{parent_category[0]}} </option>
+        {% endfor %}
+    </select>
+<!--</form>
+
+<form action="/subcategory" method="POST">-->
+    Select sub category:
+    <select name="selected_cat" id="selected_cat">
+        <option value="None" {% if subcondition == "None" %} selected {% endif %}> None </option>
+        {% for category_name in result2 %}
+            <option value="{{category_name[0]}}" {% if subcondition == category_name[0] %} selected {% endif %}> {{category_name[0]}} </option>
+        {% endfor %}
+    </select>
+
+    <button type="submit" class="btn btn-success btn-sm"> Search </button>
+</form>
+</center>
+
+<div class="card-body">
+    <h3 class="card-title">On Going Auction</h3>
+    <p>Current Main Category: {{ condition }}</p>
+    <p>Current Sub Category: {{ subcondition }}</p>
+
+    <form action="/auction_page" method="POST">
+    <table class="table table-dark">
+        <tr>
+            <th scope="col"> Seller </th>
+            <th scope="col"> Listing ID </th>
+            <th scope="col"> Category </th>
+            <th scope="col"> Auction Title </th>
+            <th scope="col"> Product Name </th>
+            <th scope="col"> Product Description </th>
+            <th scope="col"> Quantity </th>
+            <th scope="col"> Reserve Price </th>
+            <th scope="col"> Max Bid </th>
+            <th scope="col"> Status </th>
+            <th scope="col"> <center>Join Auction</center> </th>
+
+        </tr>
+        <tbody>
+        {% for seller_email, listing_id, category, auction_title, product_name, product_description, quantity, reserve_price, max_bids, status in show_0 %}
+            <tr>
+                <td> {{ seller_email }} </td>
+                <td> {{ listing_id }} </td>
+                <td> {{ category }} </td>
+                <td> {{ auction_title }} </td>
+                <td> {{ product_name }}</td>
+                <td> {{ product_description }}</td>
+                <td> {{ quantity }}</td>
+                <td> {{ reserve_price }}</td>
+                <td> {{ max_bids }}</td>
+                <td> {{ status }}</td>
+                <td> <center> <button name="bid_p" type="submit" class="btn btn-success btn-sm" value="{{ listing_id }}"> Bid </button> </center> </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </form>
+</div>
+
+
+<script> </script>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+</html>

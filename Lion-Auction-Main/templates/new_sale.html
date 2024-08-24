@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title></title>
+
+    <style>
+
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .navbar a {
+            float: left;
+            font-size: 16px;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .dropdown {
+            float: left;
+            overflow: hidden;
+        }
+
+        .dropdown2 {
+            float: left;
+            overflow: hidden;
+        }
+
+
+        .rightbutton {
+            float: right;
+            overflow: hidden;
+        }
+
+        .dropdown .dropbtn {
+            font-size: 16px;
+            border: none;
+            outline: none;
+            color: white;
+            padding: 14px 16px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+        }
+
+        .dropdown2 .dropbtn2 {
+            font-size: 16px;
+            border: none;
+            outline: none;
+            color: black;
+            padding: 14px 50px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+        }
+
+
+        .navbar a:hover, .dropdown:hover .dropbtn {
+            background-color: red;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown2:hover .dropbtn2 {
+            background-color: red;
+        }
+
+        .dropdown-content2 {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 186.7px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content2 a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown-content2 a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown2:hover .dropdown-content2 {
+            display: block;
+            position:relative;
+        }
+
+        h1 {
+            margin-left:10px
+        }
+
+        h3 {
+            margin-left:10px
+        }
+
+        p {
+            margin-left:10px
+        }
+
+        h4{
+            margin-left:10px;
+            margin-right:10px;
+        }
+
+        input[type=text] {
+          width: 100%;
+          margin-bottom: 20px;
+          padding: 12px;
+          border: 1px solid #ccc;
+          border-radius: 3px;
+        }
+
+
+    </style>
+
+</head>
+<body>
+<h1><left>New Sale</left></h1>
+
+<div class="navbar">
+    <a href="/find_home_page"> Home </a>
+    <div class="rightbutton">
+        <a href="/name"> Logout </a>
+    </div>
+</div> <br/>
+
+<h2> Add New Product: </h2>
+
+<form action="/selling" method="POST">
+<center>
+    Select main category:
+    <select name="selected_s_par" id="selected_s_par">
+        <option value="selection_0" {% if condition == "selection_0" %} selected {% endif %}> Please Select </option>
+        {% for parent_category in result %}
+            <option value="{{parent_category[0]}}" {% if condition == parent_category[0] %} selected {% endif %}> {{parent_category[0]}} </option>
+        {% endfor %}
+    </select>
+<!--</form>
+
+<form action="/subcategory" method="POST">-->
+    Select sub category:
+    <select name="selected_s_cat" id="selected_s_cat">
+        <option value="selection_1" {% if subcondition == "selection_1" %} selected {% endif %}> Please Select </option>
+        {% for category_name in result2 %}
+            <option value="{{category_name[0]}}" {% if subcondition == category_name[0] %} selected {% endif %}> {{category_name[0]}} </option>
+        {% endfor %}
+    </select>
+
+</center>
+
+    <div class="form-group">
+            <p><label for="atitle">Auction Title:</label></p>
+            <h4><input type="text" name="atitle" required class="form-control"></h4>
+
+            <p><label for="pname">Product Name:</label></p>
+            <h4><input type="text" name="pname" required class="form-control"></h4>
+
+            <p><label for="pdes">Product Description:</label></p>
+            <h4><input type="text" name="pdes" required class="form-control"></h4>
+
+            <p><label for="qty">Quantity:</label></p>
+            <h4><input type="number" name="qty" required class="form-control"></h4>
+
+            <p><label for="rprice">Reserve Price:</label></p>
+            <h4><input type="number" name="rprice" required class="form-control"></h4>
+
+            <p><label for="max">Max Bids:</label></p>
+            <h4><input type="number" name="max" required class="form-control"></h4>
+
+            <p>Status: (0 = Inactive, 1 = Active) </p>
+            <h4>
+            <select name="selected_status" id="selected_status">
+                <option value="option_0">0</option>
+                <option value="option_1">1</option>
+            </select>
+            </h4>
+
+    </div>
+
+    <h4><button type="submit" class="btn btn-success btn-sm"> Add </button></h4>
+
+</form>
+
+
+
+<script> </script>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+</html>
